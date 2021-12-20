@@ -1,3 +1,9 @@
+const crypto = require ("crypto")
+const generateHash = (content) => crypto.createHash("sha256")
+        .update(content)
+        .digest("hex")
+
+
 class MekkleTree {
     constructor(name, content, level, parent){
         this.name = name;
@@ -6,6 +12,9 @@ class MekkleTree {
         this.parent =parent
 
         this.children = []
+        this.hash = generateHash(JSON.stringify({
+            name, level, content
+        }))
     }
 
     setContent(content) {
