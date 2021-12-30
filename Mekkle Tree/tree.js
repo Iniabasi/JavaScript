@@ -20,9 +20,24 @@ class MekkleTree {
     setContent(content) {
         
         this.content = content;
+        this.hash = generateHash(JSON.stringify({
+            type: this.type,
+            name: this.name,
+            level: this.level,
+            content: this.content
+        }))
+        this.parent.updateChildrenHashes()
+    }
+    updateChildrenHashes(){
+        
+
+    }
+    getChildHashes(){
+        return this.children.reduce((previous, current) => previous += current.hash, "")
     }
     addChild(node){
         this.children.push(node);
+        this.hash = generateHash(this.getChildHashes())
     }
 }
 
