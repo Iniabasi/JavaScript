@@ -45,15 +45,48 @@ function mySet(){
     // this will return the union of two sets
     this.union = function(newSet){
       var unionSet = new mySet();
-      var setone = this.values();
-      var settwo = newSet.values();
+      var set1 = this.values();
+      var set2 = newSet.values();
       
-      setone.forEach(function(e) {
+      set1.forEach(function(e) {
         unionSet.add(e);
       });
-      settwo.forEach(function(e){
+      set2.forEach(function(e){
         unionSet.add(e);
       });
       return unionSet;
-    }
-  } 
+    };
+    
+    // This function finds the intersection between two sets
+    this.intersection = function(newSet){
+      var intersect = new mySet();
+      var set1 = this.values();
+      set1.forEach(function(e){
+        if(newSet.has){
+          intersect.add(e);
+        };
+      });
+      return intersect;
+    };
+    
+    // This functin will return the difference between two sets as a new set
+    this.difference = function(otherSet){
+      var difference = new mySet();
+      var set1 = this.values();
+      set1.forEach(function(e){
+        if(!otherSet.has(e)){
+          difference.add(e);
+        };
+      });
+      return difference;
+    };
+    
+    // This method will check if the set is a subset
+    this.subset = function(newSet){
+      var set1 = this.values();
+      return set1.every(function(value){
+        return newSet.has(value);
+      });
+    };
+    
+  }
